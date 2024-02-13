@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "notenoughcrashes",
+  "name": "Not Enough Crashes",
+  "description": "Improves crashes in Minecraft - allows returning to title screen, blaming causing mods, and more.",
+  "version": "${version}",
+  "license": "MIT",
+  "contact": {
+    "issues": "https://github.com/natanfudge/Not-Enough-Crashes/issues",
+    "sources": "https://github.com/natanfudge/Not-Enough-Crashes",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/not-enough-crashes"
+  },
+  "icon": "icon.jpg",
+  "mixins": [
+    "notenoughcrashes.mixins.json",
+    "notenoughcrashes.fabric.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "depends": {
+    "minecraft": ">=1.17",
+    "fabricloader": ">=0.12.0"
+  },
+  "authors": [
+    "Fudge",
+    "Runemoro"
+  ],
+  "contributors": [
+    "Liach",
+    "Siuolplex",
+    "the456gamer",
+    "WuzgXY",
+    "Madis0",
+    "Fourmisain",
+    "wafflecoffee"
+  ]
+}

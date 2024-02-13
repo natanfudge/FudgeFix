@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "[35,)"
+issueTrackerURL = "https://github.com/natanfudge/Not-Enough-Crashes/issues"
+license = "MIT"
+
+[[mods]]
+modId = "fudge_fix"
+version = "${version}"
+displayName = "Not Enough Crashes"
+authors = "Fudge"
+description = '''
+Improves crashes in Minecraft - allows returning to title screen, blaming causing mods, and more.
+'''
+logoFile = "icon.jpg"
+displayTest="IGNORE_ALL_VERSION"   # IGNORE_ALL_VERSION means that your mod will not cause a red X if it's present on the client or the server. This is a special case and should only be used if your mod has no server component.
+
+[[dependencies.fudge_fix]]
+modId = "forge"
+mandatory = true
+versionRange = "[37.0.59,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.fudge_fix]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.4,)"
+ordering = "NONE"
+side = "BOTH"
