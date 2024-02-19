@@ -2,23 +2,12 @@ pluginManagement {
     repositories {
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
-        maven { url "https://files.minecraftforge.net/maven/" }
-        maven { name = 'Cotton'; url = 'https://server.bbkr.space/artifactory/libs-release/' }
+        maven { url "https://maven.minecraftforge.net/" }
         gradlePluginPortal()
     }
-
-    plugins {
-        id 'com.matthewprenger.cursegradle' version "1.4.0"
-        id 'org.jetbrains.kotlin.jvm' version '1.9.22' // Must be updated in libs.versions.toml as well!
-    }
-}
-
-plugins {
-    id 'de.fayard.refreshVersions' version '0.51.0'
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.4.0'
 }
 
 include("common")
 include("fabric")
 include("forge")
-rootProject.name = "nomorecrashes"
+rootProject.name = "FudgeFix"

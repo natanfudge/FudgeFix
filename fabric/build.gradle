@@ -1,16 +1,5 @@
-import com.modrinth.minotaur.TaskModrinthUpload
-import org.gradle.api.tasks.Copy
-
 plugins {
     alias libs.plugins.shadow
-}
-apply plugin: "com.modrinth.minotaur"
-configurations {
-    common
-    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentFabric.extendsFrom common
 }
 
 architectury {
@@ -18,32 +7,27 @@ architectury {
     fabric()
 }
 
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+}
 repositories {
-    maven {
-        name = "Quilt"
-        url = "https://maven.quiltmc.org/repository/release/"
-    }
     maven {
         name = "modmenu"
         url = "https://maven.terraformersmc.com"
     }
-    maven { url = "https://api.modrinth.com/maven" }
 }
 
 dependencies {
     modImplementation libs.fabric.loader
-    compileOnly libs.quilt.loader
-    modRuntimeOnly libs.fabric.api
-
-    // For config modmenu integration.
-    modCompileOnly("com.terraformersmc:modmenu:6.2.2")
-    modCompileOnly "maven.modrinth:iris:1.6.1+1.19.2"
-    modRuntimeOnly libs.modmenu
+    modImplementation libs.modmenu
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 }
-
 
 processResources {
     inputs.property "version", project.version
@@ -51,26 +35,28 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
-
-    filesMatching("quilt.mod.json") {
-        expand "version": project.version
-    }
 }
 
 shadowJar {
-    exclude "architectury.common.json"
     configurations = [project.configurations.shadowCommon]
-    archiveClassifier.set "dev-shadow"
+    archiveClassifier = "dev-shadow"
 }
 
 remapJar {
-//    injectAccessWidener = true
-    input.set shadowJar.archiveFile
+    injectAccessWidener = true
+    inputFile.set(shadowJar.archiveFile)
     dependsOn shadowJar
-    archiveClassifier.set "fabric"
+    archiveClassifier = null
 }
+
 jar {
-    archiveClassifier.set "dev"
+    archiveClassifier.set("dev")
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {
@@ -78,56 +64,17 @@ components.java {
         skip()
     }
 }
-
-// Asset files will otherwise be missing when debugging
-//task copyAssetFilesForDebugging(type: Copy) {
-//    def inAssets = rootProject.file("common/src/main/resources/assets/notenoughcrashes")
-//    def outAssets = new File("${project.buildDir}/resources/main/assets/notenoughcrashes")
-//    from inAssets
-//    into outAssets
-//    dependsOn rootProject.processResources
-//}
 //
-//classes.dependsOn(copyAssetFilesForDebugging)
-
-
-curseforge {
-    apiKey = project.hasProperty("curseforge_api_key") ? project.curseforge_api_key : ""
-    project {
-        id = curseforge_id
-        releaseType = release_type
-        addGameVersion "Fabric"
-        addGameVersion curseforge_mc_version
-        changelogType = "markdown"
-        changelog = rootProject.file("changelog.md")
-
-        mainArtifact(remapJar) {
-            displayName = "$mod_name $total_version Fabric"
-        }
-    }
-
-    options {
-        forgeGradleIntegration = false
-    }
-}
-modrinth {
-    group = "upload"
-    token =  project.hasProperty("modrinth_api_key") ? project.modrinth_api_key : ""
-    projectId = 'yM94ont6'
-    versionNumber = total_version + "-fabric" // Will fail if Modrinth has this version already
-    versionName = "$mod_name $total_version Fabric"
-    uploadFile = remapJar
-    gameVersions = [modrinth_mc_version]
-    loaders = ["fabric", "quilt"]
-    changelog = rootProject.file("changelog.md").text
-    versionType = release_type
-}
-
-task publishFabric {
-    group = "publishing"
-    afterEvaluate {
-        dependsOn(curseforge353890)
-        dependsOn(tasks.modrinth)
-    }
-}
-
+//publishing {
+//    publications {
+//        mavenFabric(MavenPublication) {
+//            artifactId = rootProject.name + "-" + project.name
+//            from components.java
+//        }
+//    }
+//
+//    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+//    repositories {
+//        // Add repositories to publish to here.
+//    }
+//}

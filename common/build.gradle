@@ -1,31 +1,13 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
+architectury {
+    common("fabric", "forge")
 }
+
 dependencies {
-    // We depend on fabric loader here to use the fabric @Environment annotations
+    // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
     modImplementation libs.fabric.loader
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-}
-
-configurations {
-    dev
-}
-
-artifacts {
-    dev(jar)
-}
-
-architectury {
-    common("fabric","forge")
-}
-repositories {
-    mavenCentral()
-}
-kotlin {
-    jvmToolchain(17)
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/nomorecrashes.accesswidener")
+    accessWidenerPath = file("src/main/resources/fudgefix.accesswidener")
 }
