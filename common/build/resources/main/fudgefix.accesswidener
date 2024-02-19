@@ -1,4 +1,0 @@
-accessWidener v1     named
-accessible class net/minecraft/block/entity/BeehiveBlockEntity$Bee
-accessible field net/minecraft/entity/AreaEffectCloudEntity PARTICLE_ID Lnet/minecraft/entity/data/TrackedData;
-#net.minecraft.block.entity

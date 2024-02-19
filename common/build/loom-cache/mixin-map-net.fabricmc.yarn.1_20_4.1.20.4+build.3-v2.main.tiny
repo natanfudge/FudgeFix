@@ -1,9 +1,0 @@
-v1	named	intermediary
-FIELD	io/github/natanfudge/fudgefix/mixin/MixinExplosiveProjectileEntity	D	powerX	field_7601
-FIELD	io/github/natanfudge/fudgefix/mixin/MixinExplosiveProjectileEntity	D	powerY	field_7600
-FIELD	io/github/natanfudge/fudgefix/mixin/MixinExplosiveProjectileEntity	D	powerZ	field_7599
-FIELD	io/github/natanfudge/fudgefix/mixin/MixinTranslatableTextContent	Lnet/minecraft/util/Language;	languageCache	field_25317
-FIELD	io/github/natanfudge/fudgefix/mixin/MixinTranslatableTextContent	Ljava/util/List;	translations	field_11877
-FIELD	io/github/natanfudge/fudgefix/mixin/MixinTranslatableTextContent	Ljava/lang/String;	key	field_11876
-METHOD	io/github/natanfudge/fudgefix/mixin/MixinAreaEffectCloudEntity	(Lnet/minecraft/particle/ParticleEffect;)V	setParticleType	method_5608
-METHOD	io/github/natanfudge/fudgefix/mixin/MixinBeehiveBlockEntity	()V	markDirty	method_5431
