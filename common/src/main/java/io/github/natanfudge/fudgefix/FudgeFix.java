@@ -9,23 +9,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Unique;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-
-//TODO 0. Add config screen (modmenu integration, copy midnightlib)
-// 1. Add config option for limiting mob per spawner
-// 2. Add config option for disallowing nbt hotbar
-// 3. Add config option for not allowing spawner in NBT hotbar (when minecraft loads in, hook in, and get rid of spawners, but not persistently, to not ruin their hotbar)
-//TODO: make sure configs work on forge because they use toml there and not json
-// 4. Check the rest of the crashes in the extended hotbar
+//TODO
 // 5. Test all crashes and config in fabric
 // 6. Test all crashes and config in forge
-// 7. Create a new neoforge + fabric + quilt + forge project from the arch example
-// 8. Copy all code there and see if things still work (run quilt and neoforge at least)
-// 9. create empty curseforge + modrinth projects to have something to link
 // 10. Write README.md
 // 11. Create Curseforge project + modrinth project (with description from README)
 // 11.5 create icon
@@ -33,10 +25,10 @@ import java.util.Set;
 
 public class FudgeFix {
     public static final String MOD_NAME = "FudgeFix";
-    public static final String MOD_ID = "fudge-fix";
+    public static final String MOD_ID = "fudgefix";
+    public static final int CHARACTER_LIMIT = 500;
     public static Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
-    //TODO: invoke on every platform
     public static void init() {
         MidnightConfig.init(MOD_ID, FFMidnightConfig.class);
     }
@@ -53,8 +45,8 @@ public class FudgeFix {
             // We may get false positives in strings with excessive %%%% signs consecutively, but that is rare and doing
             // this is faster than actually parsing the string.
             totalExpansions *= countPercentSigns(item.getKey());
-            // If you want more than 1000 format string expansions, you can fuck off.
-            if (totalExpansions > 1000) return true;
+            // If you want more than 20 format string expansions, you can fuck off.
+            if (totalExpansions > 20) return true;
         }
         return false;
     }

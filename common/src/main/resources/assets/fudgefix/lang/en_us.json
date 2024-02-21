@@ -1,1 +1,6 @@
-{}
+{
+  "fudgefix.midnightconfig.maxMobsPerSpawner": "Max mobs per spawner",
+  "fudgefix.midnightconfig.maxMobsPerSpawnerComment": "Limits the amount of mobs that a single spawner can spawn. Recommended value: 100",
+  "fudgefix.midnightconfig.disableCommandBlockCloningComment": "Disable command block cloning",
+  "fudgefix.midnightconfig.disableCommandBlockCloning": "Prevents duplicating command blocks. Recommended value: Yes"
+}

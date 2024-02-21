@@ -3,11 +3,12 @@ package io.github.natanfudge.fudgefix.config;
 
 public class FFMidnightConfig extends MidnightConfig {
     @Comment
-    public static Comment disableReturnToMainMenuComment1;
-    @Comment
-    public static Comment disableReturnToMainMenuComment2;
+    public static Comment maxMobsPerSpawnerComment;
     @Entry
-    public static boolean disableReturnToMainMenu = false;
+    public static int maxMobsPerSpawner = 1000;
+    @Comment
+    public static Comment disableCommandBlockCloningComment;
 
+    @Entry public static boolean disableCommandBlockCloning = false;
 
 }

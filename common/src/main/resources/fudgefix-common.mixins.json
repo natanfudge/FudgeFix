@@ -6,8 +6,11 @@
   "mixins": [
     "MixinAreaEffectCloudEntity",
     "MixinBeehiveBlockEntity",
+    "MixinCloneCommand",
+    "MixinEntity",
     "MixinExplosiveProjectileEntity",
     "MixinLivingEntity",
+    "MixinMobSpawnerLogic",
     "MixinTranslatableTextContent"
   ],
   "client": [

@@ -15,7 +15,8 @@
   "entrypoints": {
     "main": [
       "io.github.natanfudge.fudgefix.fabric.FudgeFixFabric"
-    ]
+    ],
+    "modmenu": [ "io.github.natanfudge.fudgefix.fabric.modmenu.ModMenuConfigIntegration" ]
   },
   "mixins": [
     "fudgefix.mixins.json",
