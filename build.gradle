@@ -52,7 +52,7 @@ allprojects {
 
 publishMods {
     //TODO: write a parser to take the latest changelog from CHANGELOG.md
-    changelog = "Initial Release"
+    changelog = "Reduce mod size"
     type = BETA
 
     def optionsCurseforge = curseforgeOptions {
