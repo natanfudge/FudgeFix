@@ -48,3 +48,56 @@ allprojects {
         withSourcesJar()
     }
 }
+
+
+publishMods {
+    //TODO: write a parser to take the latest changelog from CHANGELOG.md
+    changelog = "Initial Release"
+    type = BETA
+
+    def optionsCurseforge = curseforgeOptions {
+        accessToken = providers.environmentVariable("curseforge_api_key")
+        minecraftVersions.add("1.20.4")
+        projectId = "979805"
+    }
+
+    def optionsModrinth = modrinthOptions {
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        projectId = "wGJ6yOo9"
+        minecraftVersions.add("1.20.4")
+    }
+
+    curseforge("curseforgeFabric") {
+        from optionsCurseforge
+        modLoaders.add("fabric")
+        modLoaders.add("quilt")
+        file = project(":fabric").tasks.named("remapJar").get().archiveFile
+        displayName = "${rootProject.mod_name} ${rootProject.total_version} Fabric"
+        version = "${rootProject.total_version}-fabric"
+    }
+
+    curseforge("curseforgeForge") {
+        from optionsCurseforge
+        modLoaders.add("forge")
+        file = project(":forge").tasks.named("remapJar").get().archiveFile
+        displayName = "${rootProject.mod_name} ${rootProject.total_version} Forge"
+        version = "${rootProject.total_version}-forge"
+    }
+
+    modrinth("modrinthFabric") {
+        from optionsModrinth
+        modLoaders.add("fabric")
+        modLoaders.add("quilt")
+        file = project(":fabric").tasks.named("remapJar").get().archiveFile
+        displayName = "${rootProject.mod_name} ${rootProject.total_version} Fabric"
+        version = "${rootProject.total_version}-fabric"
+    }
+
+    modrinth("modrinthForge") {
+        from optionsModrinth
+        modLoaders.add("forge")
+        file = project(":forge").tasks.named("remapJar").get().archiveFile
+        displayName = "${rootProject.mod_name} ${rootProject.total_version} Forge"
+        version = "${rootProject.total_version}-forge"
+    }
+}
