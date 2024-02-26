@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "FudgeFix",
-  "description": "Fixes Minecraft bugs",
+  "description": "Fixes Minecraft vulnerabilities",
   "authors": [],
   "contact": {},
 

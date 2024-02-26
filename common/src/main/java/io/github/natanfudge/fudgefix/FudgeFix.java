@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 //TODO
-// 5. Test all crashes and config in fabric
-// 6. Test all crashes and config in forge
 // 10. Write README.md
 // 11. Create Curseforge project + modrinth project (with description from README)
 // 11.5 create icon
